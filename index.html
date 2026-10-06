@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#4a0610">
+<title>Dussehra Dhamaka – Spin & Win</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="particles" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<header class="hero">
+  <div class="diya" aria-hidden="true">🪔</div>
+  <p class="shop" id="shopName"></p>
+  <h1 id="campaignName"></h1>
+  <h2 id="campaignSub"></h2>
+  <p class="lead">Har eligible purchase par ek lucky spin.</p>
+  <button class="icon-btn" id="soundBtn" aria-pressed="true" aria-label="Sound on or off">🔊</button>
+</header>
+
+<main class="layout">
+  <section class="card" id="customerCard" aria-labelledby="cdTitle">
+    <h3 id="cdTitle">Customer Details</h3>
+    <form id="customerForm" novalidate>
+      <label for="cName">Customer Name</label>
+      <input id="cName" autocomplete="off" placeholder="e.g. SUBHO BAIRAGI" maxlength="50">
+      <small class="err" id="eName" role="alert"></small>
+
+      <label for="cMobile">Mobile Number</label>
+      <input id="cMobile" type="tel" inputmode="numeric" autocomplete="off" placeholder="10-digit mobile number" maxlength="14">
+      <small class="err" id="eMobile" role="alert"></small>
+
+      <label for="cBill">Bill Number</label>
+      <input id="cBill" autocomplete="off" placeholder="e.g. DS-10452" maxlength="20">
+      <small class="err" id="eBill" role="alert"></small>
+
+      <button class="btn btn-gold" type="submit" id="continueBtn">CONTINUE TO SPIN</button>
+      <button class="btn-link" type="button" id="resetBtn" hidden>Change details</button>
+    </form>
+  </section>
+
+  <section class="stage" aria-label="Prize wheel">
+    <div class="wheel-wrap" id="wheelWrap">
+      <div class="pointer" id="pointer" aria-hidden="true"></div>
+      <canvas id="wheel" width="640" height="640" role="img" aria-label="Prize wheel with 10 segments"></canvas>
+      <div class="hub" aria-hidden="true">🪔</div>
+    </div>
+    <button class="btn btn-spin" id="spinBtn" disabled>🎡 SPIN NOW</button>
+    <p class="hint" id="spinHint">Enter customer details to unlock the spin.</p>
+    <p class="note">Phone and Bike segments are campaign showcase visuals, not redeemable prizes.</p>
+  </section>
+</main>
+
+<section class="terms" aria-labelledby="tcTitle">
+  <h3 id="tcTitle">Terms &amp; Conditions</h3>
+  <ol id="termsList"></ol>
+</section>
+
+<footer>
+  <span id="footShop"></span>
+  <button class="btn-link" id="adminBtn" aria-label="Open spin history">History</button>
+</footer>
+
+<!-- Result modal -->
+<div class="modal" id="resultModal" hidden role="dialog" aria-modal="true" aria-labelledby="rTitle">
+  <div class="sheet" id="resultSheet">
+    <div class="rEmoji" id="rEmoji">🎉</div>
+    <h3 id="rTitle">CONGRATULATIONS!</h3>
+    <p class="youwon">YOU WON</p>
+    <div class="prize" id="rPrize"></div>
+    <dl class="meta">
+      <dt>Customer</dt><dd id="rName"></dd>
+      <dt>Bill No.</dt><dd id="rBill"></dd>
+      <dt>Date &amp; Time</dt><dd id="rDate"></dd>
+    </dl>
+    <p class="show">Show this result at the billing counter.</p>
+    <div class="actions">
+      <button class="btn btn-ghost" id="saveBtn">SAVE RESULT</button>
+      <button class="btn btn-ghost" id="printBtn">PRINT</button>
+      <button class="btn btn-gold" id="doneBtn">DONE</button>
+    </div>
+  </div>
+</div>
+
+<!-- Duplicate modal -->
+<div class="modal" id="dupModal" hidden role="alertdialog" aria-modal="true" aria-labelledby="dTitle">
+  <div class="sheet">
+    <div class="rEmoji">🚫</div>
+    <h3 id="dTitle">Already Participated</h3>
+    <p>This bill has already used its Dussehra Spin.</p>
+    <p class="show" id="dInfo"></p>
+    <div class="actions"><button class="btn btn-gold" data-close="dupModal">OK</button></div>
+  </div>
+</div>
+
+<!-- History modal -->
+<div class="modal" id="histModal" hidden role="dialog" aria-modal="true" aria-labelledby="hTitle">
+  <div class="sheet wide">
+    <h3 id="hTitle">Spin History</h3>
+    <div class="summary" id="summary"></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Customer</th><th>Mobile</th><th>Bill Number</th><th>Reward</th><th>Date</th><th>Time</th></tr></thead>
+        <tbody id="histBody"></tbody>
+      </table>
+    </div>
+    <div class="actions"><button class="btn btn-gold" data-close="histModal">CLOSE</button></div>
+  </div>
+</div>
+
+<!-- Print-only receipt -->
+<div id="receipt" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
